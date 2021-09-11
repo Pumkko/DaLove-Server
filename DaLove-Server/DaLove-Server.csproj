@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <RootNamespace>DaLove_Server</RootNamespace>
-    <UserSecretsId>42efd875-d01f-4e85-b258-ae3abba4d003</UserSecretsId>
+    <RootNamespace>Dalove_Server</RootNamespace>
+    <UserSecretsId>d832aadb-5c9e-4b3b-90e5-a68e86ca6a6b</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 

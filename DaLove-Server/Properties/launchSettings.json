@@ -3,8 +3,8 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:13837",
-      "sslPort": 44319
+      "applicationUrl": "http://localhost:47444",
+      "sslPort": 44371
     }
   },
   "$schema": "http://json.schemastore.org/launchsettings.json",
@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "DaLove_Server": {
+    "Dalove_Server": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",
