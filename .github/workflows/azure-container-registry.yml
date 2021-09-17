@@ -15,6 +15,7 @@ jobs:
             files: 'DaLove-Server/appsettings.json'
           env:
             AzureBlobOptions.ConnectionString: ${{ secrets.AZURE_BLOB_CONNECTION_STRING }}
+            AzureBlobOptions.MemoryContainer: ${{ secrets.AZURE_BLOB_CONTAINER }}
           
         - name: 'Login via Azure CLI'
           uses: azure/login@v1
