@@ -12,7 +12,7 @@ jobs:
         - name: App Settings Variable Substitution
           uses: microsoft/variable-substitution@v1
           with:
-            files: '${{env.DOTNET_ROOT}}/DaLove-Server/appsettings.json'
+            files: 'DaLove-Server/appsettings.json'
           env:
             AzureBlobOptions.ConnectionString: ${{ secrets.AZURE_BLOB_CONNECTION_STRING }}
           
