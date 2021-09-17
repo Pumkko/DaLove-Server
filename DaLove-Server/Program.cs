@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Dalove_Server
+namespace DaLove_Server
 {
     public class Program
     {

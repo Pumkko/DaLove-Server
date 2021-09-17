@@ -1,6 +1,6 @@
 using System;
 
-namespace Dalove_Server
+namespace DaLove_Server
 {
     public class WeatherForecast
     {
