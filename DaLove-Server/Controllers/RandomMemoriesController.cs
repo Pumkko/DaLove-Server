@@ -45,9 +45,7 @@ namespace DaLove_Server.Controllers
         [HttpGet]
         public ActionResult GetRandomMemories()
         {
-
-            return Ok("valid token");
-            /*var rand = new Random();
+            var rand = new Random();
 
             var randomIndex = rand.Next(0, _videos.Length - 1);
 
@@ -57,7 +55,7 @@ namespace DaLove_Server.Controllers
 
             var blobClient = blobContainerClient.GetBlobClient(videoName);
             var sasUri = blobClient.GenerateSasUri(BlobSasPermissions.Read, DateTimeOffset.Now.AddMinutes(10));
-            return Ok(sasUri.AbsoluteUri);*/
+            return Ok(sasUri.AbsoluteUri);
         }
     }
 }
