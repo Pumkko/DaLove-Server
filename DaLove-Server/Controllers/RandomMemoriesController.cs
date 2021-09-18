@@ -1,11 +1,13 @@
 ﻿using Azure.Storage.Blobs;
 using Azure.Storage.Sas;
 using DaLove_Server.Options;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
 namespace DaLove_Server.Controllers
 {
+    [Authorize("read:memories")]
     [ApiController]
     [Route("[controller]")]
     public class RandomMemoriesController : ControllerBase
@@ -43,7 +45,9 @@ namespace DaLove_Server.Controllers
         [HttpGet]
         public ActionResult GetRandomMemories()
         {
-            var rand = new Random();
+
+            return Ok("valid token");
+            /*var rand = new Random();
 
             var randomIndex = rand.Next(0, _videos.Length - 1);
 
@@ -53,7 +57,7 @@ namespace DaLove_Server.Controllers
 
             var blobClient = blobContainerClient.GetBlobClient(videoName);
             var sasUri = blobClient.GenerateSasUri(BlobSasPermissions.Read, DateTimeOffset.Now.AddMinutes(10));
-            return Ok(sasUri.AbsoluteUri);
+            return Ok(sasUri.AbsoluteUri);*/
         }
     }
 }
