@@ -16,6 +16,8 @@ jobs:
           env:
             AzureBlobOptions.ConnectionString: ${{ secrets.AZURE_BLOB_CONNECTION_STRING }}
             AzureBlobOptions.MemoryContainer: ${{ secrets.AZURE_BLOB_CONTAINER }}
+            Auth0Options.Authority: ${{ secrets.AUTH0_AUTHORITY }}
+            Auth0Options.Audience: ${{ secrets.AUTH0_AUDIENCE }}
           
         - name: 'Login via Azure CLI'
           uses: azure/login@v1

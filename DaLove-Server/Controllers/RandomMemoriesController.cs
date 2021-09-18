@@ -1,11 +1,13 @@
 ﻿using Azure.Storage.Blobs;
 using Azure.Storage.Sas;
 using DaLove_Server.Options;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
 namespace DaLove_Server.Controllers
 {
+    [Authorize("read:memories")]
     [ApiController]
     [Route("[controller]")]
     public class RandomMemoriesController : ControllerBase
