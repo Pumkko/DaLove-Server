@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31624.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DaLove-Server", "DaLove-Server\DaLove-Server.csproj", "{3C4DCF0C-D1DF-4717-9A92-F8A9150C3B07}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DaLove-Server", "DaLove-Server\DaLove-Server.csproj", "{3C4DCF0C-D1DF-4717-9A92-F8A9150C3B07}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DaLove-Server.Data", "DaLove-Server.Data\DaLove-Server.Data.csproj", "{A36381A1-4491-4633-8E56-D0A2B8E601FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{3C4DCF0C-D1DF-4717-9A92-F8A9150C3B07}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C4DCF0C-D1DF-4717-9A92-F8A9150C3B07}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C4DCF0C-D1DF-4717-9A92-F8A9150C3B07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A36381A1-4491-4633-8E56-D0A2B8E601FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A36381A1-4491-4633-8E56-D0A2B8E601FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A36381A1-4491-4633-8E56-D0A2B8E601FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A36381A1-4491-4633-8E56-D0A2B8E601FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
