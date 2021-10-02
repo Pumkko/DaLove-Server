@@ -1,9 +1,15 @@
-on: workflow_dispatch
+on: 
+    workflow_dispatch:
+        branches: 
+            master
+            
 name: Linux_Container_Workflow
 
 jobs:
     build-and-deploy:
         runs-on: ubuntu-latest
+        environment: production
+        
         steps:
         # checkout the repo
         - name: 'Checkout GitHub Action'
@@ -18,6 +24,8 @@ jobs:
             AzureBlobOptions.MemoryContainer: ${{ secrets.AZURE_BLOB_CONTAINER }}
             Auth0Options.Authority: ${{ secrets.AUTH0_AUTHORITY }}
             Auth0Options.Audience: ${{ secrets.AUTH0_AUDIENCE }}
+            ConnectionStrings.DefaultConnection: $ {{ secrets.SQL_CONNECTION_STRING }}
+        
           
         - name: 'Login via Azure CLI'
           uses: azure/login@v1
@@ -33,3 +41,9 @@ jobs:
         - run: |
             docker build . --file DaLove-Server/Dockerfile -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/dalove-master:${{ github.sha }}
             docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/dalove-master:${{ github.sha }}
+            
+        - name: Update database
+          run: |
+            dotnet tool install --global dotnet-ef
+            dotnet tool restore
+            dotnet ef database update -p DaLove-Server.Data -s DaLove-Server
