@@ -41,9 +41,3 @@ jobs:
         - run: |
             docker build . --file DaLove-Server/Dockerfile -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/dalove-master:${{ github.sha }}
             docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/dalove-master:${{ github.sha }}
-            
-        - name: Update database
-          run: |
-            dotnet tool install --global dotnet-ef
-            dotnet tool restore
-            dotnet ef database update -p DaLove-Server.Data -s DaLove-Server
