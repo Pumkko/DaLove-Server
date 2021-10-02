@@ -24,7 +24,7 @@ jobs:
             AzureBlobOptions.MemoryContainer: ${{ secrets.AZURE_BLOB_CONTAINER }}
             Auth0Options.Authority: ${{ secrets.AUTH0_AUTHORITY }}
             Auth0Options.Audience: ${{ secrets.AUTH0_AUDIENCE }}
-            ConnectionStrings.DefaultConnection: $ {{ secrets.SQL_CONNECTION_STRING }}
+            ConnectionStrings.DefaultConnection: ${{ secrets.SQL_CONNECTION_STRING }}
         
           
         - name: 'Login via Azure CLI'
