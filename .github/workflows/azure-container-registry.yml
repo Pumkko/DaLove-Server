@@ -20,11 +20,6 @@ jobs:
           with:
             files: 'DaLove-Server/appsettings.json'
           env:
-            AzureBlobOptions.ConnectionString: ${{ secrets.AZURE_BLOB_CONNECTION_STRING }}
-            AzureBlobOptions.MemoryContainer: ${{ secrets.AZURE_BLOB_CONTAINER }}
-            Auth0Options.Authority: ${{ secrets.AUTH0_AUTHORITY }}
-            Auth0Options.Audience: ${{ secrets.AUTH0_AUDIENCE }}
-            ConnectionStrings.DefaultConnection: ${{ secrets.SQL_CONNECTION_STRING }}
             KeyVaultOptions.KeyVaultUri: ${{ secrets.AZURE_KEY_VAULT_URI }}
         
           
