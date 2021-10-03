@@ -26,8 +26,9 @@ namespace DaLove_Server.Controllers
         {
             try
             {
+                var uri = new Uri(_keyVaultOptions.KeyVaultUri);
 
-                SecretClient client = new SecretClient(new Uri(_keyVaultOptions.KeyVaultUri), new DefaultAzureCredential());
+                SecretClient client = new SecretClient(uri, new DefaultAzureCredential());
 
                 var secret = await client.GetSecretAsync("secret");
 

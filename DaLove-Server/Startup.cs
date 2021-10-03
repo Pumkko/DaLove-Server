@@ -99,7 +99,7 @@ namespace DaLove_Server
         private void AddOptionsForType<T>(IServiceCollection services) where T : class
         {
             services.Configure<T>(
-                Configuration.GetSection(nameof(T)));
+                Configuration.GetSection(typeof(T).Name));
 
             services.AddSingleton(sp =>
                 sp.GetRequiredService<IOptions<T>>().Value);
