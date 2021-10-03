@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DaLove-Server.Data\DaLove-Server.Data.csproj" />
+    <ProjectReference Include="..\DaLove-Server.Services\DaLove-Server.Services.csproj" />
   </ItemGroup>
 
 </Project>

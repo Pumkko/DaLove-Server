@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>DaLove_Server.Services</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Azure.Storage.Blobs" Version="12.10.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DaLove-Server.Data\DaLove-Server.Data.csproj" />
+    <ProjectReference Include="..\DaLove-Server.Options\DaLove-Server.Options.csproj" />
+  </ItemGroup>
+
+</Project>

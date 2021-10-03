@@ -2,6 +2,8 @@ using Azure.Identity;
 using Azure.Security.KeyVault.Secrets;
 using DaLove_Server.Data;
 using DaLove_Server.Options;
+using DaLove_Server.Services.RandomMemories;
+using DaLove_Server.Services.RandomMemoriesAccess;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -17,18 +19,20 @@ namespace DaLove_Server
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment currentEnvironnment)
         {
             Configuration = configuration;
+            CurrentEnvironnement = currentEnvironnment;
         }
 
         public IConfiguration Configuration { get; }
+
+        public IWebHostEnvironment CurrentEnvironnement { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-
 
             var keyVaultOptions = new KeyVaultOptions();
             Configuration.GetSection(nameof(KeyVaultOptions)).Bind(keyVaultOptions);
@@ -53,7 +57,14 @@ namespace DaLove_Server
                 options.Audience = auth0Audience;
             });
 
-
+            if (CurrentEnvironnement.IsProduction())
+            {
+                StartupProduction.ConfigureDependencies(services);
+            }
+            else
+            {
+                StartupDeveloppment.ConfigureDependencies(services);
+            }
 
             services.AddAuthorization(options =>
             {
@@ -61,6 +72,8 @@ namespace DaLove_Server
             });
 
             services.AddSingleton<IAuthorizationHandler, HasScopeHandler>();
+
+
 
             services.AddSwaggerGen(c =>
             {
