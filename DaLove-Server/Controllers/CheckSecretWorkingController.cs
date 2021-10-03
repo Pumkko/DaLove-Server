@@ -36,7 +36,7 @@ namespace DaLove_Server.Controllers
             catch(Exception e)
             {
                 // The whole controller will be removed anyway
-                return Ok(e.StackTrace);
+                return Ok(e.Message);
             }
         }
     }
