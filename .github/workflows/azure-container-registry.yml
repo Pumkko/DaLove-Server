@@ -25,6 +25,7 @@ jobs:
             Auth0Options.Authority: ${{ secrets.AUTH0_AUTHORITY }}
             Auth0Options.Audience: ${{ secrets.AUTH0_AUDIENCE }}
             ConnectionStrings.DefaultConnection: ${{ secrets.SQL_CONNECTION_STRING }}
+            KeyVaultOptions.KeyVaultUri: ${{ secrets.AZURE_KEY_VAULT_URI }}
         
           
         - name: 'Login via Azure CLI'

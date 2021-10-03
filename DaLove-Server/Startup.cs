@@ -4,19 +4,12 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace DaLove_Server
 {
@@ -38,12 +31,10 @@ namespace DaLove_Server
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            services.Configure<AzureBlobOptions>(
-                Configuration.GetSection(nameof(AzureBlobOptions)));
 
-            services.AddSingleton(sp =>
-                sp.GetRequiredService<IOptions<AzureBlobOptions>>().Value);
-
+            AddOptionsForType<AzureBlobOptions>(services);
+            AddOptionsForType<KeyVaultOptions>(services);
+           
 
             services.Configure<Auth0Options>(
                 Configuration.GetSection(nameof(Auth0Options)));
@@ -103,6 +94,15 @@ namespace DaLove_Server
             {
                 endpoints.MapControllers();
             });
+        }
+
+        private void AddOptionsForType<T>(IServiceCollection services) where T : class
+        {
+            services.Configure<T>(
+                Configuration.GetSection(nameof(T)));
+
+            services.AddSingleton(sp =>
+                sp.GetRequiredService<IOptions<T>>().Value);
         }
     }
 }
