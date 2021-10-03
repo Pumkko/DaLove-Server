@@ -1,6 +1,7 @@
 ﻿using Azure.Storage.Blobs;
 using Azure.Storage.Sas;
 using DaLove_Server.Data;
+using DaLove_Server.Data.Domain;
 using DaLove_Server.Options;
 using System;
 using System.Collections.Generic;

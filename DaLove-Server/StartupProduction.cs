@@ -1,10 +1,7 @@
 ﻿using DaLove_Server.Services.RandomMemories;
 using DaLove_Server.Services.RandomMemoriesAccess;
+using DaLove_Server.Services.UserProfiles;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace DaLove_Server
 {
@@ -14,6 +11,7 @@ namespace DaLove_Server
         {
             services.AddTransient<IRandomMemory, RandomMemoryEfCore>();
             services.AddTransient<IMemoryAccess, AzureStorageMemoryAccess>();
+            services.AddTransient<IUserProfileAccess, UserProfileEfCore>();
         }
     }
 }

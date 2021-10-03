@@ -1,4 +1,5 @@
 ﻿using DaLove_Server.Data;
+using DaLove_Server.Data.Domain;
 using DaLove_Server.Services.RandomMemories;
 using System;
 

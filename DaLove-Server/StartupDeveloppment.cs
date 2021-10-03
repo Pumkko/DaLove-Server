@@ -1,6 +1,7 @@
 ﻿using DaLove_Server.Services.Fakes;
 using DaLove_Server.Services.RandomMemories;
 using DaLove_Server.Services.RandomMemoriesAccess;
+using DaLove_Server.Services.UserProfiles;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace DaLove_Server
         {
             services.AddTransient<IRandomMemory, FakeRandomMemory>();
             services.AddTransient<IMemoryAccess, FakeHttpLinkMemoryAccess>();
+            services.AddTransient<IUserProfileAccess, UserProfileEfCore>();
         }
     }
 }

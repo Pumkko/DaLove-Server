@@ -12,10 +12,8 @@ using System.Security.Claims;
 
 namespace DaLove_Server.Controllers
 {
-    [Authorize("read:memories")]
-    [ApiController]
     [Route("[controller]")]
-    public class RandomMemoriesController : ControllerBase
+    public class RandomMemoriesController : AuthorizedController
     {
         private readonly IMemoryAccess _memoryAccess;
         private readonly IRandomMemory _randomMemory;
@@ -29,10 +27,7 @@ namespace DaLove_Server.Controllers
         [HttpGet]
         public ActionResult GetRandomMemories()
         {
-            var userIdClaim = User.Claims.Single(c => c.Type == ClaimTypes.NameIdentifier);
-            var userId = userIdClaim.Value;
-
-            var memory = _randomMemory.GetRandomMemory(userId);
+            var memory = _randomMemory.GetRandomMemory(CurrentUserId);
             if(memory == null)
             {
                 return NoContent();

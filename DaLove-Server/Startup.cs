@@ -2,8 +2,6 @@ using Azure.Identity;
 using Azure.Security.KeyVault.Secrets;
 using DaLove_Server.Data;
 using DaLove_Server.Options;
-using DaLove_Server.Services.RandomMemories;
-using DaLove_Server.Services.RandomMemoriesAccess;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
