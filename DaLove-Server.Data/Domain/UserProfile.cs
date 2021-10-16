@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DaLove_Server.Data.Domain
 {
-    public class UserProfile
+    public record UserProfile
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]

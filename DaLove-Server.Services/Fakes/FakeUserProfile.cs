@@ -10,14 +10,17 @@ namespace DaLove_Server.Services.Fakes
 {
     public class FakeUserProfile : IUserProfileAccessService
     {
+        static private UserProfile _fakeUserProfile = null;
+
+        public UserProfile CreateUserProfile(UserProfile newUserProfile)
+        {
+            _fakeUserProfile = newUserProfile;
+            return _fakeUserProfile;
+        }
+
         public UserProfile GetUserProfile(string userId)
         {
-            return new()
-            {
-                UserId = userId,
-                DisplayName = "FakeDisplayName",
-                UniqueUserName = "FakeUniqueUserId"
-            };
+            return _fakeUserProfile;
         }
     }
 }

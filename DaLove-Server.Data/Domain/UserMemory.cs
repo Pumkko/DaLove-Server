@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DaLove_Server.Data.Domain
 {
-    public class UserMemory
+    public record UserMemory
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

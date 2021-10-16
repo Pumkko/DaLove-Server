@@ -27,4 +27,8 @@
     <ProjectReference Include="..\DaLove-Server.Services\DaLove-Server.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Exceptions\" />
+  </ItemGroup>
+
 </Project>
