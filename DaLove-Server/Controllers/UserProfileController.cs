@@ -12,9 +12,9 @@ namespace DaLove_Server.Controllers
     [Route("[controller]")]
     public class UserProfileController : AuthorizedController
     {
-        private IUserProfileAccess _userProfileAccess;
+        private IUserProfileAccessService _userProfileAccess;
 
-        public UserProfileController(IUserProfileAccess userProfileAccess): base()
+        public UserProfileController(IUserProfileAccessService userProfileAccess): base()
         {
             _userProfileAccess = userProfileAccess;
         }

@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace DaLove_Server.Services.RandomMemories
 {
-    public class RandomMemoryEfCore : IRandomMemory
+    public class RandomMemoryDbContextService : IRandomMemoryService
     {
 
         private readonly DaLoveDbContext _daLoveDbContext;
 
-        public RandomMemoryEfCore(DaLoveDbContext daLoveDbContext)
+        public RandomMemoryDbContextService(DaLoveDbContext daLoveDbContext)
         {
             _daLoveDbContext = daLoveDbContext;
         }

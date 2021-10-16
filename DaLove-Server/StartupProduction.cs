@@ -9,9 +9,9 @@ namespace DaLove_Server
     {
         public static void ConfigureDependencies(IServiceCollection services)
         {
-            services.AddTransient<IRandomMemory, RandomMemoryEfCore>();
-            services.AddTransient<IMemoryAccess, AzureStorageMemoryAccess>();
-            services.AddTransient<IUserProfileAccess, UserProfileEfCore>();
+            services.AddTransient<IRandomMemoryService, RandomMemoryDbContextService>();
+            services.AddTransient<IMemoryAccessService, AzureStorageMemoryAccessService>();
+            services.AddTransient<IUserProfileAccessService, UserProfileDbContextService>();
         }
     }
 }

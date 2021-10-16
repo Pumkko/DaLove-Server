@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DaLove_Server.Services.UserProfiles
 {
-    public interface IUserProfileAccess
+    public interface IUserProfileAccessService
     {
         /// <summary>
         /// Return the profile of the given user, null if none can be found

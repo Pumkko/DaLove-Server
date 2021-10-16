@@ -14,9 +14,9 @@ namespace DaLove_Server
     {
         public static void ConfigureDependencies(IServiceCollection services)
         {
-            services.AddTransient<IRandomMemory, FakeRandomMemory>();
-            services.AddTransient<IMemoryAccess, FakeHttpLinkMemoryAccess>();
-            services.AddTransient<IUserProfileAccess, UserProfileEfCore>();
+            services.AddTransient<IRandomMemoryService, FakeRandomMemory>();
+            services.AddTransient<IMemoryAccessService, FakeHttpLinkMemoryAccess>();
+            services.AddTransient<IUserProfileAccessService, UserProfileDbContextService>();
         }
     }
 }

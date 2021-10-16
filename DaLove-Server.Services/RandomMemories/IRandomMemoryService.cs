@@ -3,7 +3,7 @@ using DaLove_Server.Data.Domain;
 
 namespace DaLove_Server.Services.RandomMemories
 {
-    public interface IRandomMemory
+    public interface IRandomMemoryService
     {
         /// <summary>
         /// Return a rendom memory associated with the user

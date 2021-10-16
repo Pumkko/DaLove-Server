@@ -15,10 +15,10 @@ namespace DaLove_Server.Controllers
     [Route("[controller]")]
     public class RandomMemoriesController : AuthorizedController
     {
-        private readonly IMemoryAccess _memoryAccess;
-        private readonly IRandomMemory _randomMemory;
+        private readonly IMemoryAccessService _memoryAccess;
+        private readonly IRandomMemoryService _randomMemory;
 
-        public RandomMemoriesController(IMemoryAccess memoryAccess, IRandomMemory randomMemory)
+        public RandomMemoriesController(IMemoryAccessService memoryAccess, IRandomMemoryService randomMemory)
         {
             _memoryAccess = memoryAccess;
             _randomMemory = randomMemory;

@@ -11,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace DaLove_Server.Services.RandomMemoriesAccess
 {
-    public class AzureStorageMemoryAccess : IMemoryAccess
+    public class AzureStorageMemoryAccessService : IMemoryAccessService
     {
         private AzureBlobOptions _azureBlobOptions;
 
-        public AzureStorageMemoryAccess(AzureBlobOptions azureBlobOptions)
+        public AzureStorageMemoryAccessService(AzureBlobOptions azureBlobOptions)
         {
             _azureBlobOptions = azureBlobOptions;
         }

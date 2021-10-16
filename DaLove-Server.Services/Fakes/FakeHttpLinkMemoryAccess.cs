@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DaLove_Server.Services.RandomMemoriesAccess
 {
-    public class FakeHttpLinkMemoryAccess : IMemoryAccess
+    public class FakeHttpLinkMemoryAccess : IMemoryAccessService
     {
         public Uri GetUriAccessToMemory(UserMemory memory)
         {

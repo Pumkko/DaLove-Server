@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DaLove_Server.Services.RandomMemoriesAccess
 {
-    public interface IMemoryAccess
+    public interface IMemoryAccessService
     {
         /// <summary>
         /// Return an URI that should be publicly available so the callee can access the memory content

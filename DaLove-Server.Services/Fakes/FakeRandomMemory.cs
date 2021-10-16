@@ -5,7 +5,7 @@ using System;
 
 namespace DaLove_Server.Services.Fakes
 {
-    public class FakeRandomMemory : IRandomMemory
+    public class FakeRandomMemory : IRandomMemoryService
     {
         public UserMemory GetRandomMemory(string userId)
         {
