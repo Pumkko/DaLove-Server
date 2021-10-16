@@ -71,8 +71,6 @@ namespace DaLove_Server
 
             services.AddSingleton<IAuthorizationHandler, HasScopeHandler>();
 
-
-
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "DaLove_Server", Version = "v1" });

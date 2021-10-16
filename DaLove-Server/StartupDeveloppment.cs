@@ -16,7 +16,7 @@ namespace DaLove_Server
         {
             services.AddTransient<IRandomMemoryService, FakeRandomMemory>();
             services.AddTransient<IMemoryAccessService, FakeHttpLinkMemoryAccess>();
-            services.AddTransient<IUserProfileAccessService, UserProfileDbContextService>();
+            services.AddTransient<IUserProfileAccessService, FakeUserProfile>();
         }
     }
 }
