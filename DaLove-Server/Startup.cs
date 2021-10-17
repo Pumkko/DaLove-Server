@@ -38,11 +38,12 @@ namespace DaLove_Server
             Configuration.GetSection(nameof(KeyVaultOptions)).Bind(keyVaultOptions);
             var keyVaultClient = new SecretClient(new Uri(keyVaultOptions.KeyVaultUri), new DefaultAzureCredential());
 
+            KeyVaultConfiguration.AddAzureStorageOptions(services, keyVaultClient);
+            KeyVaultConfiguration.AddAuthorization(services, keyVaultClient);
+
             if (CurrentEnvironnement.IsProduction())
             {
                 KeyVaultConfiguration.AddSqlServer(services, keyVaultClient);
-                KeyVaultConfiguration.AddAzureStorageOptions(services, keyVaultClient);
-                KeyVaultConfiguration.AddAuthorization(services, keyVaultClient);
                 StartupProduction.ConfigureDependencies(services);
             }
             else
@@ -50,9 +51,6 @@ namespace DaLove_Server
                 services.AddDbContext<DaLoveDbContext>(options =>
                     options.UseSqlServer("Data Source=localhost;Initial Catalog=dalove;Integrated Security=True"));
 
-                KeyVaultConfiguration.AddAzureStorageOptions(services, keyVaultClient);
-                KeyVaultConfiguration.AddAuthorization(services, keyVaultClient);
-                StartupProduction.ConfigureDependencies(services);
                 StartupDeveloppment.ConfigureDependencies(services);
             }
 
