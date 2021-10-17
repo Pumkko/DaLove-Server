@@ -31,6 +31,11 @@ namespace DaLove_Server.Services.UserProfiles
             return newUserProfile;
         }
 
+        public bool ExistsUserName(string uniqueUserName)
+        {
+            return _daLoveDbContext.UserProfiles.Any(u => u.UniqueUserName == uniqueUserName);
+        }
+
         public UserProfile GetUserProfile(string userId)
         {
             return _daLoveDbContext.UserProfiles.SingleOrDefault(p => p.UserId == userId);

@@ -34,12 +34,12 @@ namespace DaLove_Server
             services.AddControllers();
 
 
+            var keyVaultOptions = new KeyVaultOptions();
+            Configuration.GetSection(nameof(KeyVaultOptions)).Bind(keyVaultOptions);
+            var keyVaultClient = new SecretClient(new Uri(keyVaultOptions.KeyVaultUri), new DefaultAzureCredential());
+
             if (CurrentEnvironnement.IsProduction())
             {
-                var keyVaultOptions = new KeyVaultOptions();
-                Configuration.GetSection(nameof(KeyVaultOptions)).Bind(keyVaultOptions);
-                var keyVaultClient = new SecretClient(new Uri(keyVaultOptions.KeyVaultUri), new DefaultAzureCredential());
-
                 KeyVaultConfiguration.AddSqlServer(services, keyVaultClient);
                 KeyVaultConfiguration.AddAzureStorageOptions(services, keyVaultClient);
                 KeyVaultConfiguration.AddAuthorization(services, keyVaultClient);
@@ -47,6 +47,12 @@ namespace DaLove_Server
             }
             else
             {
+                services.AddDbContext<DaLoveDbContext>(options =>
+                    options.UseSqlServer("Data Source=localhost;Initial Catalog=dalove;Integrated Security=True"));
+
+                KeyVaultConfiguration.AddAzureStorageOptions(services, keyVaultClient);
+                KeyVaultConfiguration.AddAuthorization(services, keyVaultClient);
+                StartupProduction.ConfigureDependencies(services);
                 StartupDeveloppment.ConfigureDependencies(services);
             }
 
@@ -68,10 +74,8 @@ namespace DaLove_Server
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "DaLove_Server v1"));
             }
-            else
-            {
-                dbContext.Database.Migrate();
-            }
+
+            dbContext.Database.Migrate();
 
             app.UseHttpsRedirection();
 

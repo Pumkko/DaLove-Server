@@ -22,5 +22,10 @@ namespace DaLove_Server.Services.Fakes
         {
             return _fakeUserProfile;
         }
+
+        public bool ExistsUserName(string uniqueUserName)
+        {
+            return _fakeUserProfile?.UniqueUserName == uniqueUserName;
+        }
     }
 }

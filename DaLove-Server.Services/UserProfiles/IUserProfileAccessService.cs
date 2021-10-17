@@ -18,5 +18,12 @@ namespace DaLove_Server.Services.UserProfiles
         /// <exception cref="System.Data.DuplicateNameException"></exception>
         /// <param name="newUserProfile"></param>
         public UserProfile CreateUserProfile(UserProfile newUserProfile);
+
+        /// <summary>
+        /// Returns true if the username already exists
+        /// </summary>
+        /// <param name="uniqueUserName">the username to check</param>
+        /// <returns>a boolean value</returns>
+        public bool ExistsUserName(string uniqueUserName);
     }
 }

@@ -64,7 +64,13 @@ namespace DaLove_Server.Controllers
             {
                 return BadRequest(newUserProfileDto.UniqueUserName);
             }
+        }
 
+        [HttpGet("{uniqueUserName}")]
+        public ActionResult UniqueUserNameAvailable(string uniqueUserName)
+        {
+            var userProfile = _userProfileAccess.ExistsUserName(uniqueUserName);
+            return Ok(userProfile);
         }
     }
 }

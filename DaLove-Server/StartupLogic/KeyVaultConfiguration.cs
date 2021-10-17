@@ -42,11 +42,13 @@ namespace DaLove_Server.StartupLogic
         {
             var connectionString = keyVaultClient.GetSecret("AzureStorageConnectionString").Value.Value;
             var containerName = keyVaultClient.GetSecret("AzureStorageMemoryContainerName").Value.Value;
+            var avatarContainerName = keyVaultClient.GetSecret("AzureStorageAvatarContainerName").Value.Value;
 
             var azureBlobOptions = new AzureBlobOptions()
             {
                 ConnectionString = connectionString,
-                MemoryContainer = containerName
+                MemoryContainer = containerName,
+                AvatarContainer = avatarContainerName
             };
 
             services.AddSingleton(azureBlobOptions);
@@ -58,7 +60,6 @@ namespace DaLove_Server.StartupLogic
             services.AddDbContext<DaLoveDbContext>(options =>
                 options.UseSqlServer(connectionString));
         }
-
 
     }
 }
