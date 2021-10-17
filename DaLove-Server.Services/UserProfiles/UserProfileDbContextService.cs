@@ -31,6 +31,11 @@ namespace DaLove_Server.Services.UserProfiles
             return newUserProfile;
         }
 
+        public bool ExistsUserId(string userId)
+        {
+            return _daLoveDbContext.UserProfiles.Any(u => u.UserId == userId);
+        }
+
         public bool ExistsUserName(string uniqueUserName)
         {
             return _daLoveDbContext.UserProfiles.Any(u => u.UniqueUserName == uniqueUserName);
@@ -41,5 +46,16 @@ namespace DaLove_Server.Services.UserProfiles
             return _daLoveDbContext.UserProfiles.SingleOrDefault(p => p.UserId == userId);
         }
 
+        public void SetAvatar(string userId, string avatarFileName)
+        {
+            var profile  = GetUserProfile(userId);
+            if(profile == null)
+            {
+                throw new NoNullAllowedException(nameof(profile));
+            }
+
+            profile.AvatarFileName = avatarFileName;
+            _daLoveDbContext.SaveChanges();
+        }
     }
 }

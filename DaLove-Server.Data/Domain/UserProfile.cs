@@ -19,5 +19,8 @@ namespace DaLove_Server.Data.Domain
 
         [Required]
         public string UniqueUserName { get; set; }
+
+        public string AvatarFileName { get; set; }
     }
+
 }

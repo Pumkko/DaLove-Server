@@ -1,5 +1,5 @@
 ﻿using DaLove_Server.Data.Domain;
-
+using System;
 
 namespace DaLove_Server.Services.UserProfiles
 {
@@ -25,5 +25,19 @@ namespace DaLove_Server.Services.UserProfiles
         /// <param name="uniqueUserName">the username to check</param>
         /// <returns>a boolean value</returns>
         public bool ExistsUserName(string uniqueUserName);
+
+        /// <summary>
+        /// Returns true if the user with the given id has a profile
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public bool ExistsUserId(string userId);
+
+        /// <summary>
+        /// Set the avatar for the given user 
+        /// </summary>
+        /// <param name="userId">User ID, the user id must already have a created userprofile</param>
+        /// <param name="avatarFileName">guid of a known profile</param>
+        void SetAvatar(string userId, string avatarFileName);
     }
 }
