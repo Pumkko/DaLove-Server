@@ -1,4 +1,5 @@
-﻿using DaLove_Server.Data.Domain;
+﻿using AutoMapper;
+using DaLove_Server.Data.Domain;
 using DaLove_Server.Data.Dtos;
 using DaLove_Server.Services.UserProfiles;
 using Microsoft.AspNetCore.Authorization;
@@ -15,11 +16,13 @@ namespace DaLove_Server.Controllers
     [Route("[controller]")]
     public class UserProfileController : AuthorizedController
     {
-        private IUserProfileAccessService _userProfileAccess;
+        private readonly IUserProfileAccessService _userProfileAccess;
+        private readonly IMapper _mapper;
 
-        public UserProfileController(IUserProfileAccessService userProfileAccess) : base()
+        public UserProfileController(IUserProfileAccessService userProfileAccess, IMapper mapper) : base()
         {
             _userProfileAccess = userProfileAccess;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -31,12 +34,8 @@ namespace DaLove_Server.Controllers
                 return NoContent();
             }
 
-            // Will add automapper later
-            return Ok(new UserProfileGetDto()
-            {
-                DisplayUserName = userProfile.DisplayName,
-                UniqueUserName = userProfile.UniqueUserName
-            });
+            var userProfileGetDto = _mapper.Map<UserProfileGetDto>(userProfile);
+            return Ok(userProfileGetDto);
         }
 
         [HttpPost]
@@ -44,21 +43,12 @@ namespace DaLove_Server.Controllers
         {
             try
             {
-                // Will add automapper later
-                var userProfile = new UserProfile()
-                {
-                    UniqueUserName = newUserProfileDto.UniqueUserName,
-                    DisplayName = newUserProfileDto.DisplayUserName,
-                    UserId = CurrentUserId
-                };
+                var userProfile = _mapper.Map<UserProfile>(newUserProfileDto);
 
                 var createdUserProfile = _userProfileAccess.CreateUserProfile(userProfile);
-                // Will add automapper later
-                return Ok(new UserProfileGetDto()
-                {
-                    DisplayUserName = userProfile.DisplayName,
-                    UniqueUserName = userProfile.UniqueUserName
-                });
+
+                var userProfileGetDto = _mapper.Map<UserProfileGetDto>(createdUserProfile);
+                return Ok(userProfileGetDto);
             }
             catch (DuplicateNameException)
             {

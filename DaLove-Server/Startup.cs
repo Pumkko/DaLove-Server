@@ -54,6 +54,9 @@ namespace DaLove_Server
                 StartupDeveloppment.ConfigureDependencies(services);
             }
 
+            services.AddHttpContextAccessor();
+            services.AddAutoMapper(typeof(Startup));
+
             services.AddSingleton<IAuthorizationHandler, HasScopeHandler>();
 
             services.AddSwaggerGen(c =>

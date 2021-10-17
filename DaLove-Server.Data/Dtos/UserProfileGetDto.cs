@@ -8,8 +8,8 @@ namespace DaLove_Server.Data.Dtos
 {
     public record UserProfileGetDto
     {
-        public string UniqueUserName { get; init; }
+        public string DisplayName { get; set; }
 
-        public string DisplayUserName { get; init; }
+        public string UniqueUserName { get; set; }
     }
 }
