@@ -11,6 +11,8 @@ namespace DaLove_Server.Services.Avatar
     {
         Uri StoreAvatar(string avatarGuid, Stream fileToUpload);
 
-        Uri GetAvatar(string avatarGuid);
+        Uri GetAvatar(string avatarFileName);
+
+        void RemoveAvatarFile(string avatarFileName);
     }
 }

@@ -24,11 +24,19 @@ namespace DaLove_Server.Services.Avatar
             return sasUri;
         }
 
-        public Uri StoreAvatar(string avatarGuid, Stream fileToUpload)
+        public void RemoveAvatarFile(string avatarFileName)
         {
             var blobContainerClient = new BlobContainerClient(_azureBlobOptions.ConnectionString, _azureBlobOptions.AvatarContainer);
 
-            var blobClient = blobContainerClient.GetBlobClient(avatarGuid);
+            var blobClient = blobContainerClient.GetBlobClient(avatarFileName);
+            blobClient.Delete();
+        }
+
+        public Uri StoreAvatar(string avatarFileName, Stream fileToUpload)
+        {
+            var blobContainerClient = new BlobContainerClient(_azureBlobOptions.ConnectionString, _azureBlobOptions.AvatarContainer);
+
+            var blobClient = blobContainerClient.GetBlobClient(avatarFileName);
             blobClient.Upload(fileToUpload);
             return blobClient.Uri;
         }

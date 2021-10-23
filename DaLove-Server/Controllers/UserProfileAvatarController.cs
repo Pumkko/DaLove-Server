@@ -25,12 +25,16 @@ namespace DaLove_Server.Controllers
         [HttpPost]
         public ActionResult UploadAvatar(IFormFile file)
         {
-            var userProfile = _userProfileAccessService.ExistsUserId(CurrentUserId);
-            if (!userProfile)
+            var userProfile = _userProfileAccessService.GetUserProfile(CurrentUserId);
+            if (userProfile == null)
             {
                 return BadRequest("Unknown userId");
             }
 
+            if (userProfile.AvatarFileName != null)
+            {
+                _avatarAccess.RemoveAvatarFile(userProfile.AvatarFileName);
+            }
 
             // Might rework later with a hash of the file and the user id
             var guidFileName = Guid.NewGuid();
