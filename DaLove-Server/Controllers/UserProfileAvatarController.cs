@@ -12,10 +12,10 @@ namespace DaLove_Server.Controllers
     [Route("[controller]")]
     public class UserProfileAvatarController : AuthorizedController
     {
-        private readonly IAvatarAccess _avatarAccess;
+        private readonly IAvatarAccessService _avatarAccess;
         private readonly IUserProfileAccessService _userProfileAccessService;
 
-        public UserProfileAvatarController(IAvatarAccess avatarAccess, IUserProfileAccessService userProfileAccessService)
+        public UserProfileAvatarController(IAvatarAccessService avatarAccess, IUserProfileAccessService userProfileAccessService)
         {
             _avatarAccess = avatarAccess;
             _userProfileAccessService = userProfileAccessService;
@@ -31,7 +31,7 @@ namespace DaLove_Server.Controllers
                 return BadRequest("Unknown userId");
             }
 
-            if (userProfile.AvatarFileName != null)
+            if (!string.IsNullOrEmpty(userProfile.AvatarFileName))
             {
                 _avatarAccess.RemoveAvatarFile(userProfile.AvatarFileName);
             }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DaLove_Server.Services.Avatar
 {
-    public interface IAvatarAccess
+    public interface IAvatarAccessService
     {
         Uri StoreAvatar(string avatarGuid, Stream fileToUpload);
 

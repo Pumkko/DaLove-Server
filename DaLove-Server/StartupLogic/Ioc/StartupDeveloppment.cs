@@ -18,7 +18,7 @@ namespace DaLove_Server
             services.AddTransient<IRandomMemoryService, RandomMemoryDbContextService>();
             services.AddTransient<IMemoryAccessService, AzureStorageMemoryAccessService>();
             services.AddTransient<IUserProfileAccessService, UserProfileDbContextService>();
-            services.AddTransient<IAvatarAccess, AzureStorageAvatarAccess>();
+            services.AddTransient<IAvatarAccessService, AzureStorageAvatarAccessService>();
         }
     }
 }

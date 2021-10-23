@@ -15,7 +15,8 @@ namespace DaLove_Server.MappingProfile
             CreateMap<UserProfileCreateDto, UserProfile>()
                 .ForMember(dest => dest.UserId, opt => opt.MapFrom<UserIdResolver>());
 
-            CreateMap<UserProfile, UserProfileGetDto>();
+            CreateMap<UserProfile, UserProfileGetDto>()
+                .ForMember(dest => dest.AvatarUri, opt => opt.MapFrom<AvatarUriResolver>());
                 
         }
     }

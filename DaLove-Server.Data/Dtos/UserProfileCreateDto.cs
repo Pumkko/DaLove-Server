@@ -2,8 +2,8 @@
 {
     public record UserProfileCreateDto
     {
-        public string DisplayName { get; set; }
+        public string DisplayName { get; init; }
 
-        public string UniqueUserName { get; set; }
+        public string UniqueUserName { get; init; }
     }
 }

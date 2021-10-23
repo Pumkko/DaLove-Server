@@ -5,11 +5,11 @@ using System.IO;
 
 namespace DaLove_Server.Services.Avatar
 {
-    public class AzureStorageAvatarAccess : IAvatarAccess
+    public class AzureStorageAvatarAccessService : IAvatarAccessService
     {
         private readonly AzureBlobOptions _azureBlobOptions;
 
-        public AzureStorageAvatarAccess(AzureBlobOptions azureBlobOptions)
+        public AzureStorageAvatarAccessService(AzureBlobOptions azureBlobOptions)
         {
             _azureBlobOptions = azureBlobOptions;
         }

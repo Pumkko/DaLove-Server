@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DaLove_Server.Data.Domain;
 using DaLove_Server.Data.Dtos;
+using DaLove_Server.Services.Avatar;
 using DaLove_Server.Services.UserProfiles;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
