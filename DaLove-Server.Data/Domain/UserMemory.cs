@@ -2,17 +2,18 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DaLove_Server.Data
+namespace DaLove_Server.Data.Domain
 {
-    public class UserMemory
+    public record UserMemory
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public int Id { get; init; }
 
-        public string UserId { get; set; }
+        [Required]
+        public string UserId { get; init; }
 
-        
+        [Required]
         public string MemoryName { get; set; }
     }
 }

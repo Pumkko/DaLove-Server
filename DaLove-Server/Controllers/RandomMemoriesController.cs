@@ -2,6 +2,8 @@
 using Azure.Storage.Sas;
 using DaLove_Server.Data;
 using DaLove_Server.Options;
+using DaLove_Server.Services.RandomMemories;
+using DaLove_Server.Services.RandomMemoriesAccess;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -10,38 +12,30 @@ using System.Security.Claims;
 
 namespace DaLove_Server.Controllers
 {
-    [Authorize("read:memories")]
-    [ApiController]
     [Route("[controller]")]
-    public class RandomMemoriesController : ControllerBase
+    public class RandomMemoriesController : AuthorizedController
     {
-        private readonly AzureBlobOptions _azureBlobOptions;
-        private readonly DaLoveDbContext _daLoveDbContext;
+        private readonly IMemoryAccessService _memoryAccess;
+        private readonly IRandomMemoryService _randomMemory;
 
-        public RandomMemoriesController(AzureBlobOptions azureBlobOptions, DaLoveDbContext daLoveDbContext)
+        public RandomMemoriesController(IMemoryAccessService memoryAccess, IRandomMemoryService randomMemory)
         {
-            _azureBlobOptions = azureBlobOptions;
-            _daLoveDbContext = daLoveDbContext;
+            _memoryAccess = memoryAccess;
+            _randomMemory = randomMemory;
         }
 
         [HttpGet]
         public ActionResult GetRandomMemories()
         {
-            var rand = new Random();
+            var memory = _randomMemory.GetRandomMemory(CurrentUserId);
+            if(memory == null)
+            {
+                return NoContent();
+            }
 
-            var userIdClaim = User.Claims.Single(c => c.Type == ClaimTypes.NameIdentifier);
-            var userId = userIdClaim.Value;
+            var memoryUri = _memoryAccess.GetUriAccessToMemory(memory);
 
-            var allMemoriesForUsers = _daLoveDbContext.Memories.Where(m => m.UserId == userId).Select(m => m.MemoryName);
-            var randomIndex = rand.Next(0, allMemoriesForUsers.Count() - 1);
-
-            var memory = allMemoriesForUsers.AsEnumerable().ElementAt(randomIndex);
-
-            var blobContainerClient = new BlobContainerClient(_azureBlobOptions.ConnectionString, _azureBlobOptions.MemoryContainer);
-
-            var blobClient = blobContainerClient.GetBlobClient(memory);
-            var sasUri = blobClient.GenerateSasUri(BlobSasPermissions.Read, DateTimeOffset.Now.AddMinutes(10));
-            return Ok(sasUri.AbsoluteUri);
+            return Ok(memoryUri);
         }
     }
 }
