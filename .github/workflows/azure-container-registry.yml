@@ -21,7 +21,6 @@ jobs:
             files: 'DaLove-Server/appsettings.json'
           env:
             KeyVaultOptions.KeyVaultUri: ${{ secrets.AZURE_KEY_VAULT_URI }}
-            ApplicationInsights.InstrumentationKey: ${{ secrets.AZURE_APP_INSIGHT_INSTRUMENTATION_KEY }}
         
           
         - name: 'Login via Azure CLI'
