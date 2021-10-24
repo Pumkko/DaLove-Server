@@ -25,6 +25,11 @@ namespace DaLove_Server.Controllers
         [HttpPost]
         public ActionResult UploadAvatar(IFormFile file)
         {
+            if(file == null)
+            {
+                return BadRequest(file);
+            }
+
             var userProfile = _userProfileAccessService.GetUserProfile(CurrentUserId);
             if (userProfile == null)
             {
