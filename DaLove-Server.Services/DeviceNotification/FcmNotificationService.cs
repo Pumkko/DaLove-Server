@@ -37,7 +37,10 @@ namespace DaLove_Server.Services.DeviceNotification
                     }
                 });
 
-            await messaging.SendAllAsync(messages);
+            if (messages.Any())
+            {
+                await messaging.SendAllAsync(messages);
+            }
         }
     }
 }

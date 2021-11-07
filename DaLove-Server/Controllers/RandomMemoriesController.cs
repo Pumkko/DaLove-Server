@@ -1,4 +1,5 @@
-﻿using Azure.Storage.Blobs;
+﻿using AutoMapper;
+using Azure.Storage.Blobs;
 using Azure.Storage.Sas;
 using DaLove_Server.Data;
 using DaLove_Server.Data.Dtos;
@@ -25,16 +26,19 @@ namespace DaLove_Server.Controllers
         private readonly IMemoryDomainService _randomDomainContext;
         private readonly IUserProfileAccessService _userProfileAccessService;
         private readonly IDeviceNotificationService _deviceNotificationService;
+        private readonly IMapper _mapper;
 
         public RandomMemoriesController(IMemoryContainerService memoryContainer, 
             IMemoryDomainService memoryDomainContext, 
             IUserProfileAccessService userProfileAccessService,
-            IDeviceNotificationService deviceNotificationService)
+            IDeviceNotificationService deviceNotificationService,
+            IMapper mapper)
         {
             _memoryContainer = memoryContainer;
             _randomDomainContext = memoryDomainContext;
             _userProfileAccessService = userProfileAccessService;
             _deviceNotificationService = deviceNotificationService;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -48,7 +52,18 @@ namespace DaLove_Server.Controllers
 
             var memoryUri = _memoryContainer.GetUriAccessToMemory(memory);
 
-            return Ok(memoryUri);
+            var creatorUserProfile = _userProfileAccessService.GetUserProfile(memory.UserId);
+
+            var userProfileGetDto = _mapper.Map<UserProfileGetDto>(creatorUserProfile);
+
+            var dto = new GetUserMemoryDto()
+            {
+                Creator = userProfileGetDto,
+                MemoryFriendlyName = memory.MemoryFriendlyName,
+                MemoryUri = memoryUri
+            };
+
+            return Ok(dto);
         }
 
         [HttpPost]

@@ -11,6 +11,9 @@ namespace DaLove_Server.Data.Domain
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; init; }
 
+        /// <summary>
+        /// Creator of the memory
+        /// </summary>
         [Required]
         public string UserId { get; init; }
 
@@ -19,6 +22,9 @@ namespace DaLove_Server.Data.Domain
         [Required]
         public string MemoryUniqueName { get; set; }
 
+        /// <summary>
+        /// list of the users who can access the memory, the creator is among them
+        /// </summary>
         public virtual ICollection<UserProfile> Recipients { get; set; }
     }
 }
