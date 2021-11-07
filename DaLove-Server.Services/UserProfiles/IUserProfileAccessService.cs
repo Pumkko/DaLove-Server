@@ -1,5 +1,6 @@
 ﻿using DaLove_Server.Data.Domain;
 using System;
+using System.Collections.Generic;
 
 namespace DaLove_Server.Services.UserProfiles
 {
@@ -18,6 +19,13 @@ namespace DaLove_Server.Services.UserProfiles
         /// <exception cref="System.Data.DuplicateNameException"></exception>
         /// <param name="newUserProfile"></param>
         public UserProfile CreateUserProfile(UserProfile newUserProfile);
+
+        /// <summary>
+        /// Returns the first 30 profiles that matches the filter either by unique username or display username
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <returns></returns>
+        IEnumerable<UserProfile> GetPossibleRecipients(string filter);
 
         /// <summary>
         /// Returns true if the username already exists
