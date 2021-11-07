@@ -57,7 +57,7 @@ namespace DaLove_Server.Services.RandomMemories
             var newUserMemory = new UserMemory()
             {
                 MemoryUniqueName = uniqueName,
-                MemoryFriendlyName = postMemoryDto.Caption,
+                MemoryFriendlyName = postMemoryDto.MemoryCaption,
                 UserId = currentUserId,
                 Recipients = recipients
             };
