@@ -1,6 +1,8 @@
 ﻿using Azure.Security.KeyVault.Secrets;
 using DaLove_Server.Data;
 using DaLove_Server.Options;
+using FirebaseAdmin;
+using Google.Apis.Auth.OAuth2;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -54,19 +56,19 @@ namespace DaLove_Server.StartupLogic
         {
             var googleFcmOptionsCredentials = keyVaultClient.GetSecret("FcmGoogleJsonCredentials").Value.Value;
 
-            var options = new GoogleFcmOptions()
+            var app = FirebaseApp.Create(new AppOptions()
             {
-                JsonCredentials = googleFcmOptionsCredentials,
-            };
+                Credential = GoogleCredential.FromJson(googleFcmOptionsCredentials)
+            });
 
-            services.AddSingleton(options);
+            services.AddSingleton(app);
         }
 
         public static void AddSqlServer(IServiceCollection services, SecretClient keyVaultClient)
         {
-            var connectionString = keyVaultClient.GetSecret("DaloveSqlServerConnectionString").Value.Value;
+            //var connectionString = keyVaultClient.GetSecret("DaloveSqlServerConnectionString").Value.Value;
             services.AddDbContext<DaLoveDbContext>(options =>
-                options.UseSqlServer(connectionString));
+                options.UseSqlServer("Data Source=localhost;Initial Catalog=dalove;Integrated Security=True"));
         }
 
     }

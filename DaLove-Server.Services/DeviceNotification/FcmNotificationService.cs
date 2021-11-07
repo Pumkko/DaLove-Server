@@ -14,21 +14,16 @@ namespace DaLove_Server.Services.DeviceNotification
 {
     public class FcmNotificationService : IDeviceNotificationService
     {
-        private readonly GoogleFcmOptions _fcmOptions;
+        private readonly FirebaseApp _firebaseApp;
 
-        public FcmNotificationService(GoogleFcmOptions fcmOptions)
+        public FcmNotificationService(FirebaseApp firebaseApp)
         {
-            _fcmOptions = fcmOptions;
+            _firebaseApp = firebaseApp;
         }
 
         public async Task PushNotificationNewMemory(UserProfile sender, IEnumerable<UserProfile> userProfiles)
         {
-            var app = FirebaseApp.Create(new AppOptions()
-            {
-                Credential = GoogleCredential.FromJson(_fcmOptions.JsonCredentials)
-            });
-
-            var messaging = FirebaseMessaging.GetMessaging(app);
+            var messaging = FirebaseMessaging.GetMessaging(_firebaseApp);
 
             var messages = userProfiles
                 .Where(u => !string.IsNullOrEmpty(u.LastKnownFcmDeviceToken))
