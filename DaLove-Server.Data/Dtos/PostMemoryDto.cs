@@ -10,7 +10,7 @@ namespace DaLove_Server.Data.Dtos
     {
         public IEnumerable<string> Recipients { get; init; }
         
-        public string Caption { get; init; }
+        public string MemoryCaption { get; init; }
 
     }
 }
