@@ -13,10 +13,13 @@ namespace DaLove_Server.Data.Domain
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public string UniqueUserName { get; set; }
+        public string UserId { get; init; }
+
 
         [Required]
-        public string UserId { get; init; }
+        public string UniqueUserName { get; set; }
+
+
 
         [Required]
         public string DisplayName { get; set; }
