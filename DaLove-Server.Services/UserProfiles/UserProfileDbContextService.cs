@@ -43,6 +43,11 @@ namespace DaLove_Server.Services.UserProfiles
 
         public IEnumerable<UserProfile> GetPossibleRecipients(string filter)
         {
+            if (string.IsNullOrEmpty(filter))
+            {
+                return _daLoveDbContext.UserProfiles.Take(30);
+            }
+
             return _daLoveDbContext.UserProfiles.Where(u => u.UniqueUserName.Contains(filter) || u.DisplayName.Contains(filter)).Take(30);
         }
 
