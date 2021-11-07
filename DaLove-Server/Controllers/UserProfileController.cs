@@ -84,5 +84,14 @@ namespace DaLove_Server.Controllers
             var userProfileGetDto = _mapper.Map<IEnumerable<UserProfileGetDto>>(profiles);
             return Ok(userProfileGetDto);
         }
+
+
+        [HttpGet("filter")]
+        public ActionResult GetPossibleRecipients()
+        {
+            IEnumerable<UserProfile> profiles = _userProfileAccess.GetPossibleRecipients(null);
+            var userProfileGetDto = _mapper.Map<IEnumerable<UserProfileGetDto>>(profiles);
+            return Ok(userProfileGetDto);
+        }
     }
 }
