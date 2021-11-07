@@ -24,7 +24,11 @@ namespace DaLove_Server.Data.Domain
         [Required]
         public string DisplayName { get; set; }
 
+        public string LastKnownFcmDeviceToken { get; set; }
+
+
         public string AvatarFileName { get; set; }
+
 
         public virtual ICollection<UserMemory> Memories { get; set; }
     }

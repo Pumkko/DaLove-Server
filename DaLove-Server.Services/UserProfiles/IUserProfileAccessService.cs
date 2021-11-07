@@ -47,5 +47,7 @@ namespace DaLove_Server.Services.UserProfiles
         /// <param name="userId">User ID, the user id must already have a created userprofile</param>
         /// <param name="avatarFileName">guid of a known profile</param>
         void SetAvatar(string userId, string avatarFileName);
+
+        void SetNewFcmDeviceToken(UserProfile userProfile, string newToken);
     }
 }

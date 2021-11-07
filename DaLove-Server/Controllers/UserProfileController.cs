@@ -57,6 +57,19 @@ namespace DaLove_Server.Controllers
             }
         }
 
+        [HttpPost("fcm")]
+        public ActionResult PostNewFcmDeviceToken(PostFcmDto postFcmDto)
+        {
+            var userProfile = _userProfileAccess.GetUserProfile(CurrentUserId);
+            if (userProfile == null)
+            {
+                return BadRequest();
+            }
+
+            _userProfileAccess.SetNewFcmDeviceToken(userProfile, postFcmDto.NewTcmDeviceToken);
+            return Ok();
+        }
+
         [HttpGet("{uniqueUserName}")]
         public ActionResult UniqueUserNameAvailable(string uniqueUserName)
         {

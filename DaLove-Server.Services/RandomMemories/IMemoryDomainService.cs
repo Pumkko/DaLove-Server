@@ -13,6 +13,6 @@ namespace DaLove_Server.Services.RandomMemories
         /// <returns>null if nothing can be found associated with the user</returns>
         UserMemory GetRandomMemory(string userId);
 
-        void PostNewMemory(PostMemoryDto postMemoryDto, UserProfile userProfile, string currentUserId, string uniqueName);
+        UserMemory PostNewMemory(PostMemoryDto postMemoryDto, UserProfile userProfile, string currentUserId, string uniqueName);
     }
 }

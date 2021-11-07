@@ -62,5 +62,12 @@ namespace DaLove_Server.Services.UserProfiles
             profile.AvatarFileName = avatarFileName;
             _daLoveDbContext.SaveChanges();
         }
+
+        public void SetNewFcmDeviceToken(UserProfile userProfile, string newToken)
+        {
+            userProfile.LastKnownFcmDeviceToken = newToken;
+            _daLoveDbContext.Update(userProfile);
+            _daLoveDbContext.SaveChanges();
+        }
     }
 }

@@ -44,7 +44,7 @@ namespace DaLove_Server.Services.RandomMemories
         }
 
 
-        public void PostNewMemory(PostMemoryDto postMemoryDto, UserProfile userProfile, string currentUserId, string uniqueName)
+        public UserMemory PostNewMemory(PostMemoryDto postMemoryDto, UserProfile userProfile, string currentUserId, string uniqueName)
         {
             var recipients = _daLoveDbContext.UserProfiles.Where(p => postMemoryDto.Recipients.Contains(p.UniqueUserName)).ToList();
 
@@ -64,6 +64,8 @@ namespace DaLove_Server.Services.RandomMemories
 
             _daLoveDbContext.Add(newUserMemory);
             _daLoveDbContext.SaveChanges();
+
+            return newUserMemory;
         }
     }
 }
