@@ -26,7 +26,7 @@ namespace DaLove_Server.Services.DeviceNotification
             var messaging = FirebaseMessaging.GetMessaging(_firebaseApp);
 
             var messages = userProfiles
-                .Where(u => !string.IsNullOrEmpty(u.LastKnownFcmDeviceToken))
+                .Where(u => !string.IsNullOrEmpty(u.LastKnownFcmDeviceToken) && u.UniqueUserName != sender.UniqueUserName)
                 .Select(u => new Message()
                 {
                     Token = u.LastKnownFcmDeviceToken,

@@ -66,9 +66,9 @@ namespace DaLove_Server.StartupLogic
 
         public static void AddSqlServer(IServiceCollection services, SecretClient keyVaultClient)
         {
-            //var connectionString = keyVaultClient.GetSecret("DaloveSqlServerConnectionString").Value.Value;
+            var connectionString = keyVaultClient.GetSecret("DaloveSqlServerConnectionString").Value.Value;
             services.AddDbContext<DaLoveDbContext>(options =>
-                options.UseSqlServer("Data Source=localhost;Initial Catalog=dalove;Integrated Security=True"));
+                options.UseSqlServer(connectionString));
         }
 
     }
