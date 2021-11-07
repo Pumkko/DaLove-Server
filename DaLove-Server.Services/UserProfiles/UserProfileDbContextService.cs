@@ -41,6 +41,11 @@ namespace DaLove_Server.Services.UserProfiles
             return _daLoveDbContext.UserProfiles.Any(u => u.UniqueUserName == uniqueUserName);
         }
 
+        public IEnumerable<UserProfile> GetPossibleRecipients(string filter)
+        {
+            return _daLoveDbContext.UserProfiles.Where(u => u.UniqueUserName.Contains(filter) || u.DisplayName.Contains(filter)).Take(30);
+        }
+
         public UserProfile GetUserProfile(string userId)
         {
             return _daLoveDbContext.UserProfiles.SingleOrDefault(p => p.UserId == userId);
@@ -55,6 +60,13 @@ namespace DaLove_Server.Services.UserProfiles
             }
 
             profile.AvatarFileName = avatarFileName;
+            _daLoveDbContext.SaveChanges();
+        }
+
+        public void SetNewFcmDeviceToken(UserProfile userProfile, string newToken)
+        {
+            userProfile.LastKnownFcmDeviceToken = newToken;
+            _daLoveDbContext.Update(userProfile);
             _daLoveDbContext.SaveChanges();
         }
     }

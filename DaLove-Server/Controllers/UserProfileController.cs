@@ -57,11 +57,32 @@ namespace DaLove_Server.Controllers
             }
         }
 
+        [HttpPost("fcm")]
+        public ActionResult PostNewFcmDeviceToken(PostFcmDto postFcmDto)
+        {
+            var userProfile = _userProfileAccess.GetUserProfile(CurrentUserId);
+            if (userProfile == null)
+            {
+                return BadRequest();
+            }
+
+            _userProfileAccess.SetNewFcmDeviceToken(userProfile, postFcmDto.NewTcmDeviceToken);
+            return Ok();
+        }
+
         [HttpGet("{uniqueUserName}")]
         public ActionResult UniqueUserNameAvailable(string uniqueUserName)
         {
             var userProfile = _userProfileAccess.ExistsUserName(uniqueUserName);
             return Ok(userProfile);
+        }
+
+        [HttpGet("filter/{filter}")]
+        public ActionResult GetPossibleRecipients(string filter)
+        {
+            IEnumerable<UserProfile> profiles = _userProfileAccess.GetPossibleRecipients(filter);
+            var userProfileGetDto = _mapper.Map<IEnumerable<UserProfileGetDto>>(profiles);
+            return Ok(userProfileGetDto);
         }
     }
 }

@@ -3,14 +3,16 @@ using DaLove_Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DaLove_Server.Data.Migrations
 {
     [DbContext(typeof(DaLoveDbContext))]
-    partial class DaLoveDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211107090020_AllowFriendlyNameToBeNull")]
+    partial class AllowFriendlyNameToBeNull
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,7 +32,7 @@ namespace DaLove_Server.Data.Migrations
 
                     b.Property<string>("MemoryUniqueName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -38,15 +40,12 @@ namespace DaLove_Server.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MemoryUniqueName")
-                        .IsUnique();
-
                     b.ToTable("Memories");
                 });
 
             modelBuilder.Entity("DaLove_Server.Data.Domain.UserProfile", b =>
                 {
-                    b.Property<string>("UserId")
+                    b.Property<string>("UniqueUserName")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("AvatarFileName")
@@ -56,16 +55,13 @@ namespace DaLove_Server.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("LastKnownFcmDeviceToken")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UniqueUserName")
+                    b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("UserId");
+                    b.HasKey("UniqueUserName");
 
-                    b.HasIndex("UniqueUserName")
+                    b.HasIndex("UserId")
                         .IsUnique();
 
                     b.ToTable("UserProfiles");
@@ -76,12 +72,12 @@ namespace DaLove_Server.Data.Migrations
                     b.Property<int>("MemoriesId")
                         .HasColumnType("int");
 
-                    b.Property<string>("RecipientsUserId")
+                    b.Property<string>("RecipientsUniqueUserName")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("MemoriesId", "RecipientsUserId");
+                    b.HasKey("MemoriesId", "RecipientsUniqueUserName");
 
-                    b.HasIndex("RecipientsUserId");
+                    b.HasIndex("RecipientsUniqueUserName");
 
                     b.ToTable("UserMemoryUserProfile");
                 });
@@ -96,7 +92,7 @@ namespace DaLove_Server.Data.Migrations
 
                     b.HasOne("DaLove_Server.Data.Domain.UserProfile", null)
                         .WithMany()
-                        .HasForeignKey("RecipientsUserId")
+                        .HasForeignKey("RecipientsUniqueUserName")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

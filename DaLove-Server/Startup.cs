@@ -41,6 +41,7 @@ namespace DaLove_Server
 
             KeyVaultConfiguration.AddAzureStorageOptions(services, keyVaultClient);
             KeyVaultConfiguration.AddAuthorization(services, keyVaultClient);
+            KeyVaultConfiguration.AddGoogleFcmOptions(services, keyVaultClient);
 
             if (CurrentEnvironnement.IsProduction())
             {

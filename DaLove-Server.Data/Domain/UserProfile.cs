@@ -10,17 +10,27 @@ namespace DaLove_Server.Data.Domain
 {
     public record UserProfile
     {
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string UserId { get; init; }
 
-        [Required]
-        public string DisplayName { get; set; }
 
         [Required]
         public string UniqueUserName { get; set; }
 
+
+
+        [Required]
+        public string DisplayName { get; set; }
+
+        public string LastKnownFcmDeviceToken { get; set; }
+
+
         public string AvatarFileName { get; set; }
+
+
+        public virtual ICollection<UserMemory> Memories { get; set; }
     }
 
 }

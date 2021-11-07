@@ -3,14 +3,16 @@ using DaLove_Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DaLove_Server.Data.Migrations
 {
     [DbContext(typeof(DaLoveDbContext))]
-    partial class DaLoveDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211107094921_ResetUserProfilePkToUserId")]
+    partial class ResetUserProfilePkToUserId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,16 +32,13 @@ namespace DaLove_Server.Data.Migrations
 
                     b.Property<string>("MemoryUniqueName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("MemoryUniqueName")
-                        .IsUnique();
 
                     b.ToTable("Memories");
                 });
@@ -54,9 +53,6 @@ namespace DaLove_Server.Data.Migrations
 
                     b.Property<string>("DisplayName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastKnownFcmDeviceToken")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UniqueUserName")

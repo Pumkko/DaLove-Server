@@ -1,4 +1,5 @@
 ﻿using DaLove_Server.Services.Avatar;
+using DaLove_Server.Services.DeviceNotification;
 using DaLove_Server.Services.RandomMemories;
 using DaLove_Server.Services.RandomMemoriesAccess;
 using DaLove_Server.Services.UserProfiles;
@@ -10,10 +11,11 @@ namespace DaLove_Server
     {
         public static void ConfigureDependencies(IServiceCollection services)
         {
-            services.AddTransient<IRandomMemoryService, RandomMemoryDbContextService>();
-            services.AddTransient<IMemoryAccessService, AzureStorageMemoryAccessService>();
+            services.AddTransient<IMemoryDomainService, RandomMemoryDbContextService>();
+            services.AddTransient<IMemoryContainerService, AzureStorageMemoryAccessService>();
             services.AddTransient<IUserProfileAccessService, UserProfileDbContextService>();
             services.AddTransient<IAvatarAccessService, AzureStorageAvatarAccessService>();
+            services.AddTransient<IDeviceNotificationService, FcmNotificationService>();
         }
     }
 }

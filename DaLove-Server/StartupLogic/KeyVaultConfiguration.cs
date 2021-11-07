@@ -50,6 +50,18 @@ namespace DaLove_Server.StartupLogic
             services.AddSingleton(azureBlobOptions);
         }
 
+        public static void AddGoogleFcmOptions(IServiceCollection services, SecretClient keyVaultClient)
+        {
+            var googleFcmOptionsCredentials = keyVaultClient.GetSecret("FcmGoogleJsonCredentials").Value.Value;
+
+            var options = new GoogleFcmOptions()
+            {
+                JsonCredentials = googleFcmOptionsCredentials,
+            };
+
+            services.AddSingleton(options);
+        }
+
         public static void AddSqlServer(IServiceCollection services, SecretClient keyVaultClient)
         {
             var connectionString = keyVaultClient.GetSecret("DaloveSqlServerConnectionString").Value.Value;
