@@ -3,14 +3,16 @@ using DaLove_Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DaLove_Server.Data.Migrations
 {
     [DbContext(typeof(DaLoveDbContext))]
-    partial class DaLoveDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211107084121_ChangeUserProfileMemoryRelationToManyToMany")]
+    partial class ChangeUserProfileMemoryRelationToManyToMany
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,6 +28,7 @@ namespace DaLove_Server.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("MemoryFriendlyName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MemoryUniqueName")

@@ -13,9 +13,15 @@ namespace DaLove_Server.Data
 
         }
 
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseLazyLoadingProxies();
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<UserProfile>().HasIndex(p => p.UniqueUserName).IsUnique();
+            modelBuilder.Entity<UserProfile>().HasIndex(p => p.UserId).IsUnique();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using DaLove_Server.Data;
 using DaLove_Server.Data.Domain;
+using DaLove_Server.Data.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DaLove_Server.Services.RandomMemories
 {
-    public class RandomMemoryDbContextService : IRandomMemoryService
+    public class RandomMemoryDbContextService : IMemoryDomainService
     {
 
         private readonly DaLoveDbContext _daLoveDbContext;
@@ -22,9 +23,15 @@ namespace DaLove_Server.Services.RandomMemories
         {
             var rand = new Random();
 
-            var allMemoriesForUsers = _daLoveDbContext.Memories.Where(m => m.UserId == userId);
+            var currentUser = _daLoveDbContext.UserProfiles.SingleOrDefault(u => u.UserId == userId);
+            if (currentUser == null)
+            {
+                return null;
+            }
 
-            if (!allMemoriesForUsers.Any())
+            var allMemoriesForUsers = currentUser.Memories;
+
+            if (allMemoriesForUsers == null || !allMemoriesForUsers.Any())
             {
                 return null;
             }
@@ -34,6 +41,29 @@ namespace DaLove_Server.Services.RandomMemories
             var memory = allMemoriesForUsers.AsEnumerable().ElementAt(randomIndex);
 
             return memory;
+        }
+
+
+        public void PostNewMemory(PostMemoryDto postMemoryDto, UserProfile userProfile, string currentUserId, string uniqueName)
+        {
+            var recipients = _daLoveDbContext.UserProfiles.Where(p => postMemoryDto.Recipients.Contains(p.UniqueUserName)).ToList();
+
+
+            if (!postMemoryDto.Recipients.Contains(userProfile.UniqueUserName))
+            {
+                recipients.Add(userProfile);
+            }
+
+            var newUserMemory = new UserMemory()
+            {
+                MemoryUniqueName = uniqueName,
+                MemoryFriendlyName = postMemoryDto.Caption,
+                UserId = currentUserId,
+                Recipients = recipients
+            };
+
+            _daLoveDbContext.Add(newUserMemory);
+            _daLoveDbContext.SaveChanges();
         }
     }
 }
