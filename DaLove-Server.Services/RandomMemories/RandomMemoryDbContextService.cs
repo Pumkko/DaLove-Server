@@ -36,7 +36,7 @@ namespace DaLove_Server.Services.RandomMemories
                 return null;
             }
 
-            var randomIndex = rand.Next(0, allMemoriesForUsers.Count() - 1);
+            var randomIndex = rand.Next(0, allMemoriesForUsers.Count());
 
             var memory = allMemoriesForUsers.AsEnumerable().ElementAt(randomIndex);
 

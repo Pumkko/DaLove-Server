@@ -25,7 +25,7 @@ namespace DaLove_Server.Services.UserProfiles
         /// </summary>
         /// <param name="filter"></param>
         /// <returns></returns>
-        IEnumerable<UserProfile> GetPossibleRecipients(string filter);
+        IEnumerable<UserProfile> GetPossibleRecipients(string filter, string currentUserId);
 
         /// <summary>
         /// Returns true if the username already exists

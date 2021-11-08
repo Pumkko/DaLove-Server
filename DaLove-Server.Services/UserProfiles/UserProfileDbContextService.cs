@@ -41,14 +41,17 @@ namespace DaLove_Server.Services.UserProfiles
             return _daLoveDbContext.UserProfiles.Any(u => u.UniqueUserName == uniqueUserName);
         }
 
-        public IEnumerable<UserProfile> GetPossibleRecipients(string filter)
+        public IEnumerable<UserProfile> GetPossibleRecipients(string filter, string currentUserId)
         {
             if (string.IsNullOrEmpty(filter))
             {
-                return _daLoveDbContext.UserProfiles.Take(30);
+                return _daLoveDbContext.UserProfiles
+                    .Where(u => u.UserId != currentUserId).Take(30);
             }
 
-            return _daLoveDbContext.UserProfiles.Where(u => u.UniqueUserName.Contains(filter) || u.DisplayName.Contains(filter)).Take(30);
+            return _daLoveDbContext.UserProfiles
+                .Where(u => u.UserId != currentUserId)
+                .Where(u => u.UniqueUserName.Contains(filter) || u.DisplayName.Contains(filter)).Take(30);
         }
 
         public UserProfile GetUserProfile(string userId)

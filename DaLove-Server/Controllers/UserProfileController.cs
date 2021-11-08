@@ -80,7 +80,7 @@ namespace DaLove_Server.Controllers
         [HttpGet("filter/{filter}")]
         public ActionResult GetPossibleRecipients(string filter)
         {
-            IEnumerable<UserProfile> profiles = _userProfileAccess.GetPossibleRecipients(filter);
+            IEnumerable<UserProfile> profiles = _userProfileAccess.GetPossibleRecipients(filter, CurrentUserId);
             var userProfileGetDto = _mapper.Map<IEnumerable<UserProfileGetDto>>(profiles);
             return Ok(userProfileGetDto);
         }
@@ -89,7 +89,7 @@ namespace DaLove_Server.Controllers
         [HttpGet("filter")]
         public ActionResult GetPossibleRecipients()
         {
-            IEnumerable<UserProfile> profiles = _userProfileAccess.GetPossibleRecipients(null);
+            IEnumerable<UserProfile> profiles = _userProfileAccess.GetPossibleRecipients(null, CurrentUserId);
             var userProfileGetDto = _mapper.Map<IEnumerable<UserProfileGetDto>>(profiles);
             return Ok(userProfileGetDto);
         }
